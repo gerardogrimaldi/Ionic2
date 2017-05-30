@@ -20,7 +20,7 @@ import { WelcomePage } from '../pages/welcome/welcome';
 
 import { Settings } from '../providers/providers';
 
-import { TranslateService } from '@ngx-translate/core'
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   template: `<ion-menu [content]="content">

@@ -8,10 +8,6 @@ import { Items } from '../../providers/providers';
 
 import { Item } from '../../models/item';
 
-import { AuthService } from '../../app/auth/auth.service';
-
-
-
 @Component({
   selector: 'page-list-master',
   templateUrl: 'list-master.html'
@@ -20,10 +16,8 @@ import { AuthService } from '../../app/auth/auth.service';
 export class ListMasterPage {
   currentItems: Item[];
 
-
-  constructor(public auth: AuthService, public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
     this.currentItems = this.items.query();
-    auth.handleAuthentication();
   }
 
   /**

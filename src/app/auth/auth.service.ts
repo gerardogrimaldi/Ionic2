@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
+
+import { ListMasterPage } from '../../pages/list-master/list-master';
 
 import 'rxjs/add/operator/filter';
 import auth0 from 'auth0-js';
 
 @Injectable()
 export class AuthService {
+
+  private loginErrorString: string;
 
   auth0 = new auth0.WebAuth({
     clientID: 'b1Roh00xbXAluxuXtZr5NZKOPrUpXjOc',
@@ -16,7 +20,10 @@ export class AuthService {
     scope: 'openid'
   });
 
-  constructor(public navCtrl: NavController) {}
+  constructor(
+    public navCtrl: NavController,
+    public toastCtrl: ToastController,
+  ) {}
 
   public login(): void {
     this.auth0.authorize();
@@ -27,10 +34,14 @@ export class AuthService {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
-        this.getRootNav().push(SecondPage);
-        this.router.navigate(['/home']);
+        this.navCtrl.push(ListMasterPage);
       } else if (err) {
-        this.router.navigate(['/home']);
+        let toast = this.toastCtrl.create({
+          message: this.loginErrorString,
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
         console.log(err);
       }
     });
@@ -50,7 +61,7 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // Go back to the home route
-    this.router.navigate(['/']);
+    this.navCtrl.push(ListMasterPage);
   }
 
   public isAuthenticated(): boolean {

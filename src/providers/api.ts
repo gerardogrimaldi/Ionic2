@@ -7,7 +7,8 @@ import 'rxjs/add/operator/map';
  */
 @Injectable()
 export class Api {
-  url: string = 'https://example.com/api/v1';
+  //url: string = 'https://example.com/api/v1';
+  url: string = 'http://dolarhoyapi.herokuapp.com/dolar/Hola123!';
 
   constructor(public http: Http) {
   }

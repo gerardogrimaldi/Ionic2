@@ -20,6 +20,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { FbLoginPage } from '../pages/fbLogin/fbLogin';
 
 import { Api } from '../providers/api';
 import { Items } from '../mocks/providers/items';
@@ -77,7 +78,8 @@ let pages = [
   SignupPage,
   TabsPage,
   TutorialPage,
-  WelcomePage
+  WelcomePage,
+  FbLoginPage,
 ];
 
 export function declarations() {

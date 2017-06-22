@@ -3,6 +3,7 @@ import { Platform, Nav, Config } from 'ionic-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 import { CardsPage } from '../pages/cards/cards';
 import { ContentPage } from '../pages/content/content';
@@ -61,13 +62,32 @@ export class MyApp {
     { title: 'Search', component: SearchPage }
   ]
 
-  constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(private translate: TranslateService,
+              platform: Platform,
+              settings: Settings,
+              private config: Config,
+              statusBar: StatusBar,
+              splashScreen: SplashScreen,
+              private nativeStorage: NativeStorage) {
 
     this.initTranslate();
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      let env = this;
+      nativeStorage.getItem('user')
+        .then( function (data) {
+          // user is previously logged and we have his data
+          // we will let him access the app
+          env.nav.push(CardsPage);
+          splashScreen.hide();
+        }, function (error) {
+          //we don't have the user data so we will ask him to log in
+          env.nav.push(LoginPage);
+          splashScreen.hide();
+        });
+
       statusBar.styleDefault();
       splashScreen.hide();
     });

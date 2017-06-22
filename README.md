@@ -66,3 +66,7 @@ To add new languages, add new files to the `src/assets/i18n` directory, followin
 ### Changing the Language
 
 To change the language of the app, edit `src/app/app.component.ts` and modify `translate.use('en')` to use the LANGCODE from `src/assets/i18n/`
+
+
+
+https://ionicthemes.com/tutorials/about/ionic2-facebook-login
